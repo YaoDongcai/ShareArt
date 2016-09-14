@@ -1,0 +1,36 @@
+<include file="Public/header.html"/>
+<title>教员库中心</title>
+<!--教员库中心-->
+<div class="content">
+    <div class="container body-set">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="header">
+                    <div class="site-name"><h1 class="modal-title text-center"></h1></div>
+                    <div class="logoimg text-center"><img width="78px;" src="__PUBLIC__/images/teacher/teacher-icon.png"/></div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding-top: 100px;padding-bottom: 50px;">
+          
+            <volist name='list' id='teacher' >
+            <div class="col-md-4">
+                <div class="teacher-content" >
+                    <a href="{:U('Teacher/info',array('id'=>$teacher['id']))}" >
+                    <div class="img-thumbnail">
+                        <img   src="__PUBLIC__/images/teacher/{$teacher.img_url}"/>
+                    </div>
+                    <div class="teacher-nickname"><p>教员：{$teacher.nickname }</p></div>
+                    <div class="teacher-class-num">教员等级：
+                    <for start="0" end="$teacher.star">
+                    <span class="glyphicon glyphicon glyphicon-star"></span></for></p></div>
+                    </a>
+                </div>
+            </div>
+           </volist>
+            
+        </div>
+    </div>
+</div>
+
+<include file="Public/bottom.html" />

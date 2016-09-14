@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script src="__PUBLIC__/js/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/css/bootstrap.min.css">
+    <link href="__PUBLIC__/css/case.css" rel ="stylesheet">
+    <script src="__PUBLIC__/js/bootstrap.min.js"></script>
+    <title></title>
+    <style>
+        body{
+            margin-top: 120px;
+            margin-bottom: 200px;
+        }
+        p{
+            color: green;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-4 column">
+        </div>
+        <div class="col-md-2 column">
+            <img alt="140x140" src="__PUBLIC__/images/teacher/success.jpg" style="width: 50%;"/>
+        </div>
+        <div class="col-md-4 column">
+            <p>提交成功，正在跳转</p>
+            <p class="jump">
+                页面自动 <a id="href" href="<?php echo($jumpUrl); ?>">跳转</a> 等待时间： <b id="wait"><?php echo($waitSecond); ?></b>
+            </p>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    (function(){
+        var wait = document.getElementById('wait'),href = document.getElementById('href').href;
+        var interval = setInterval(function(){
+            var time = --wait.innerHTML;
+            if(time <= 0) {
+                location.href = href;
+                clearInterval(interval);
+            };
+        }, 1000);
+    })();
+</script>
+</body>
+</html>

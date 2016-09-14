@@ -1,0 +1,132 @@
+<include file="Public/header.html"/>
+<title>教员库中心</title>
+<!--教员库中心-->
+<div class="content">
+    <div class="container body-set">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="header">
+                    <div class="site-name"><h1 class="modal-title text-center"></h1></div>
+                    <div class="logoimg text-center"><img width="78px;" src="__PUBLIC__/images/teacher/teacher-icon.png"/></div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="padding-top: 100px;padding-bottom: 50px;">
+            <div class="col-md-offset-4 clo-md-4">
+                <div class="img-thumbnail">
+                    <img   src="__PUBLIC__/images/teacher/{$teacher.img_url}"/>
+                </div>
+                <p class="teacher teacher-name">
+                    <span class="teacher-icon glyphicon glyphicon-user" aria-hidden="true"></span>
+                    姓：{$teacher.nickname}</p>
+
+                <p class="teacher">  <span class="teacher-icon glyphicon glyphicon-tasks" aria-hidden="true"></span> 才艺：{$teacher.music_instruments}</p>
+                <p class="teacher">  <span class="teacher-icon glyphicon glyphicon-text-background" aria-hidden="true"></span> 教龄：{$teacher.teacher_age}</p>
+                <p class="teacher">  <span class="teacher-icon glyphicon glyphicon-education" aria-hidden="true"></span>学位：{$teacher.dipnoma}</p>
+                <p class="teacher">  <span class="teacher-icon glyphicon glyphicon-th" aria-hidden="true"></span>授课区域：{$teacher.teacher_area}</p>
+                <p class="teacher"> <span class="teacher-icon glyphicon glyphicon-book" aria-hidden="true"></span>所获证书：暂时没有</p>
+                <p class="teacher"> <span class="teacher-icon glyphicon glyphicon-bookmark" aria-hidden="true"></span>教学理念：{$teacher.teacher_ideas}</p>
+
+                <p class="teacher"><span class="teacher-icon glyphicon glyphicon-qrcode"></span>分享
+                <div class="img-thumbnail text-center">
+                    <img  src="{$teacher.img_data}"/>
+                </div>
+                </p>
+                <p class="teacher ">
+                  <span class="teacher-icon glyphicon glyphicon-eye-open">此页浏览量：<span style="font-size:23px;">{$teacher.page_count}</span></span>
+                    <button class="btn-success has-success" data-toggle="modal" data-target="#teacherModal">报名</button>
+                    <div class="modal fade" id="teacherModal">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title">报课提交申请表</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="panel panel-info">
+                                        <!--<div class="panel-heading">-->
+                                            <!--详情提交-->
+                                        <!--</div>-->
+                                        <div class="panel-body">
+                                            <form class="demands" action="{:U('upload')}" method="POST" role="form" enctype="multipart/form-data" onsubmit="return check(this)">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group ">
+                                                            <label class="control-label">手机号码</label>
+                                                            <input onblur="userphone_detect(this)"
+                                                                   name="phone" id="user_phone" type="tel" class="form-control input-lg" {$data.read} value="{$data.phone}" aria-describedby="sizing-addon1" aria-describedby="inputError2Status">
+                                                            </input>
+                                                            <span class="" aria-hidden="true"></span>
+                                                            <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                                                        </div>
+                                                        <div class="form-group" style="display: none">
+                                                            <label class="control-label">姓名</label>
+                                                            <input name="name" type="text" class="form-control input-lg" {$data.read} value="{$data.user_id}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+
+                                                        <div class="form-group">
+                                                            <label class="control-label">电子邮箱</label>
+                                                            <input onblur="useremail_detect(this)"
+                                                                   name="email" id="user_email" type="email" class="form-control input-lg" {$data.read} value="{$data.email}" aria-describedby="sizing-addon1" aria-describedby="inputError2Status">
+
+                                                            </input>
+                                                            <span class="" aria-hidden="true"></span>
+                                                            <span id="inputSuccess2Status" class="sr-only">(success)</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">您的称呼</label>
+                                                    <p class="help-block">
+                                                        我们希望可以与您沟通的时候方便称呼您 :)
+                                                    </p>
+                                                    <div class="radio">
+                                                        <label>
+                                                            <input type="radio"  name="nickname" id="optionsRadios1"
+                                                                   value="man" {$data.read} {$data.nchecked} checked> 先生
+                                                        </label>
+
+                                                        <label>
+                                                            <input type="radio" name="nickname" id="optionsRadios1"
+                                                                   value="women" {$data.read}  {$data.checked}> 女士
+                                                        </label>
+                                                    </div>
+                                                </div >
+                                                <div class="form-group">
+                                                    <label class="control-label">报课名称</label>
+                                                    <input name="course" type="text" class="form-control input-lg" {$data.read} value="{$data.title}">
+
+                                                    </input>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">其他的要求描述</label>
+                                                    <p class="help-block">
+                                                        简单的描述一下您的要求，我们更方便的安排您的课程 :)
+                                                    </p>
+                                                    <textarea name="description" type="text" class="form-control" rows="12"{$data.read}>{$data.description}</textarea>
+                                                </div >
+                                                <div class="text-right">
+                                                    <button type="submit" id="subs" class="btn btn-success">申请</button>
+                                                 </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<div class="modal-footer">-->
+                                    <!--<button type="button" class="btn btn-default active" data-dismiss="modal">关闭</button>-->
+                                    <!--<button type="button" class="btn btn-primary active">申请</button>-->
+                                <!--</div>-->
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!-- /.modal -->
+                </p>
+            </div>
+            <!--模态框-->
+
+        </div>
+    </div>
+</div>
+
+<include file="Public/bottom.html" />
